@@ -56,9 +56,9 @@ public class RegisterRestApi {
             //Call user-service's create new user method
             AccountEntity accountEntity = accountService.createAccount(registerRequest.getEmail(), registerRequest.getFullName(), registerRequest.getPassword(), registerRequest.getPhone(), RoleProperties.ROLE_USER);
             //Call otp-service's otp generate method
-            AccountOtpEntity accountOtpEntity = otpStateService.generateOtp(accountEntity.getUserId());
+        //    AccountOtpEntity accountOtpEntity = otpStateService.generateOtp(accountEntity.getUserId());
             //Call user-service's send mail asynchronous method
-            accountService.sendOtpVerifyAccount(accountEntity, accountOtpEntity);
+         //   accountService.sendOtpVerifyAccount(accountEntity, accountOtpEntity);
             return ResponseEntity.ok("Create account success!");
         } catch (DataAccessException dataAccessException) {
             ErrorResponse errorResponse = ErrorResponse.builder().message(dataAccessException.getMessage()).build();
