@@ -65,7 +65,7 @@ public class RegisterRestApi {
             return ResponseEntity.badRequest().body(gson.toJson(errorResponse));
         } catch (Exception exception) {
             exception.printStackTrace();
-            return ResponseEntity.internalServerError().body("Server temp error.");
+            return ResponseEntity.internalServerError().body(exception.getMessage());
         }
     }
 
