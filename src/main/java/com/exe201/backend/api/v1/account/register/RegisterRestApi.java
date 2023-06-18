@@ -54,7 +54,7 @@ public class RegisterRestApi {
             }
 
             //Call user-service's create new user method
-            AccountEntity accountEntity = accountService.createAccount(registerRequest.getEmail(), registerRequest.getFullName(), registerRequest.getPassword(), registerRequest.getPhone(), RoleProperties.ROLE_USER);
+            AccountEntity accountEntity = accountService.createAccount(registerRequest.getEmail(), registerRequest.getFullName(), registerRequest.getPassword(), registerRequest.getPhone(), RoleProperties.ROLE_OWNER);
             //Call otp-service's otp generate method
         //    AccountOtpEntity accountOtpEntity = otpStateService.generateOtp(accountEntity.getUserId());
             //Call user-service's send mail asynchronous method
