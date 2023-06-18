@@ -2,21 +2,25 @@ package com.exe201.backend.api.v1.account.register;
 
 import com.exe201.backend.utils.RegexHelper;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 
 @Getter
 @Setter
 public class RegisterRequest {
+    @NonNull
     private String email;
+    @NonNull
     private String fullName;
+    @NonNull
     private String password;
+    @NonNull
     private String phone;
+    @NonNull
     private String confirmPassword;
 
     //Check valid request form
-    public boolean isValidRequest() {
-        return email != null && fullName != null && password != null && confirmPassword != null;
-    }
+
 
     public String checkBusinessError() {
         email = email.trim();

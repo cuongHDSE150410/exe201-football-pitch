@@ -28,10 +28,7 @@ public class CancelBookingApi {
         SecurityContext context = SecurityContextHolder.getContext();
         userId = securityContextService.extractUsernameFromContext(context);
 
-        if (request == null || !request.isValid()) {
-            response = new CancelBookingResponse(false, "The reason is required.");
-            return ResponseEntity.badRequest().body(gson.toJson(response));
-        }
+
 
         try {
             cancelBookingService.cancelBookingFromUser(userId, bookingId, request);
@@ -54,10 +51,7 @@ public class CancelBookingApi {
         SecurityContext context = SecurityContextHolder.getContext();
         ownerId = securityContextService.extractUsernameFromContext(context);
 
-        if (request == null || !request.isValid()) {
-            response = new CancelBookingResponse(false, "The reason is required.");
-            return ResponseEntity.badRequest().body(gson.toJson(response));
-        }
+
         try {
             cancelBookingService.cancelBookingFromOwner(ownerId, bookingId, request);
             response = new CancelBookingResponse(true, "Cancel booking successfully");

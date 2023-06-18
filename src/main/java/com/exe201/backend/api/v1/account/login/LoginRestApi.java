@@ -45,10 +45,7 @@ public class LoginRestApi {
                 return ResponseEntity.badRequest().body("Request is empty body.");
             }
             //Case body wrong format
-            if (!loginRequest.isValidRequest()) {
-                ErrorResponse error = ErrorResponse.builder().message("Can't determined username and password from request.").build();
-                return ResponseEntity.badRequest().body(gson.toJson(error));
-            }
+
             //Get user from database
             AccountEntity account = accountService.findAccountByUsername(loginRequest.getUsername());
             //Case can't find user with email or username provide.

@@ -1,23 +1,15 @@
 package com.exe201.backend.api.v1.account.login;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor
 public class LoginRequest {
-    private String username;
-    private String password;
 
-    //Checking request is valid formant require
-    public boolean isValidRequest() {
-        if (username == null || password == null) {
-            return false;
-        }
-        return username.trim().length() > 0 && password.trim().length() > 0;
-    }
+    @NonNull
+    private String username;
+
+    @NonNull
+    private String password;
 }

@@ -42,10 +42,7 @@ public class RegisterRestApi {
                 return ResponseEntity.badRequest().body(gson.toJson(errorResponse));
             }
             //Case request body missing required username, password, email.
-            if (!registerRequest.isValidRequest()) {
-                ErrorResponse errorResponse = ErrorResponse.builder().message("Request body incorrect format").build();
-                return ResponseEntity.badRequest().body(gson.toJson(errorResponse));
-            }
+
 
             String error = registerRequest.checkBusinessError();
             if (error != null) {
