@@ -34,10 +34,6 @@ public class GetSlotApi {
                 response = new SlotResponse("Empty body", null);
                 return ResponseEntity.badRequest().body(gson.toJson(response));
             }
-            if (!getSlotRequest.isValid()) {
-                response = new SlotResponse("Request can not be parsed", null);
-                return ResponseEntity.badRequest().body(gson.toJson(response));
-            }
 
             //BigYard not available filter
             String bigYardId = subYardService.getBigYardIdFromSubYard(subYardId);
@@ -73,10 +69,7 @@ public class GetSlotApi {
                 response = new SlotResponse("Empty body", null);
                 return ResponseEntity.badRequest().body(gson.toJson(response));
             }
-            if (!getSlotRequest.isValid()) {
-                response = new SlotResponse("Request can not be parsed", null);
-                return ResponseEntity.badRequest().body(gson.toJson(response));
-            }
+
 
             //BigYard not available filter
             String bigYardId = subYardService.getBigYardIdFromSubYard(subYardId);
@@ -116,10 +109,7 @@ public class GetSlotApi {
                 response = new BookedSlotDetailResponse("Empty body", null);
                 return ResponseEntity.badRequest().body(gson.toJson(response));
             }
-            if (!getSlotRequest.isValid()) {
-                response = new BookedSlotDetailResponse("Request can not be parsed", null);
-                return ResponseEntity.badRequest().body(gson.toJson(response));
-            }
+
 
             //BigYard not available filter
             String bigYardId = subYardService.getBigYardIdFromSubYard(subYardId);
