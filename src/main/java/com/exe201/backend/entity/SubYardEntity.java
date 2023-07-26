@@ -28,7 +28,7 @@ public class SubYardEntity {
     @Builder.Default
     private boolean active = true;
     @Column(name = "reference", insertable = false)
-    private Integer reference = 0;
+    private int reference;
     @Column(name = "is_parent_active")
     @Builder.Default
     private boolean parentActive = true;
