@@ -31,5 +31,5 @@ public class YardReportEntity {
     @Column(name = "status")
     private String status;
     @Column(name = "reference", insertable = false)
-    private Integer reference;
+    private int reference;
 }
