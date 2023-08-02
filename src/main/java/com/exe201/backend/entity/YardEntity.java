@@ -43,7 +43,8 @@ public class YardEntity {
     private int numberOfVote;
     @Column(name = "reference", insertable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer reference;
+    @Builder.Default
+    private Integer reference = 1;
     @Column(name = "number_of_bookings", insertable = false)
     private Integer numberOfBookings;
 }
