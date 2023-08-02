@@ -146,7 +146,6 @@ public class YardService {
                         .province(province)
                         .openAt(yard.getOpenAt().format(formatter))
                         .closeAt(yard.getCloseAt().format(formatter))
-                        .reference(yard.getReference())
                         .ownerId(yard.getOwnerId())
                         .build();
             } else {
