@@ -218,7 +218,22 @@ public class YardService {
 
     public GetYardResponse findAllYardByOwnerId(String ownerId, SearchModel searchModel) {
         List<YardEntity> yards = yardRepository.findAllByOwnerIdAndDeleted(ownerId, false);
-        yards.sort((first, second) -> Integer.compare(second.getReference(), first.getReference()));
+        yards.sort((first, second) -> {
+            Integer firstReference = first.getReference();
+            Integer secondReference = second.getReference();
+
+            // Handle null values
+            if (firstReference == null && secondReference == null) {
+                return 0;
+            } else if (firstReference == null) {
+                return 1; // Move the entity with null reference to the end
+            } else if (secondReference == null) {
+                return -1; // Move the entity with null reference to the end
+            }
+
+            // Compare non-null references normally
+            return Integer.compare(secondReference, firstReference);
+        });
         int maxResult;
         int pageValue = 1;
         int offSetValue = 10;
