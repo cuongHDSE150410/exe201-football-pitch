@@ -49,6 +49,7 @@ public class YardService {
                 .name(createYardModel.getName())
                 .address(createYardModel.getAddress())
                 .active(true)
+                .reference(1)
                 .districtId(createYardModel.getDistrictId())
                 .createAt(DateHelper.getTimestampAtZone(DateHelper.VIETNAM_ZONE))
                 .openAt(LocalTime.parse(createYardModel.getOpenAt()))
