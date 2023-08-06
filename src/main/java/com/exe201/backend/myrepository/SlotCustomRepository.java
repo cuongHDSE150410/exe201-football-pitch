@@ -50,8 +50,8 @@ public class SlotCustomRepository {
             Timestamp startTime = Timestamp.valueOf(queryDate.toString() + " 00:00:00");
             Timestamp endTime = Timestamp.valueOf(queryDate.toString() + " 23:59:59");
             String nativeQuery = "SELECT * FROM slots" +
-                    " WHERE (slots.id IN (SELECT slot_id FROM booking WHERE date BETWEEN ?1 AND ?2 AND status = ?3))" +
-                    " AND ref_yard = ?4" +
+                    " WHERE (slots.id IN (SELECT slot_id FROM booking WHERE date BETWEEN ? AND ? AND status = ?))" +
+                    " AND ref_yard = ?" +
                     " AND is_active = 'true'";
             query = entityManager.createNativeQuery(nativeQuery, SlotEntity.class);
             query.setParameter(1, startTime);
@@ -70,7 +70,7 @@ public class SlotCustomRepository {
 
             String nativeQuery = "SELECT parent_yard" +
                     " FROM sub_yards" +
-                    " WHERE id = (SELECT ref_yard FROM slots WHERE id = ?1)";
+                    " WHERE id = (SELECT ref_yard FROM slots WHERE id = ?)";
 
             query = entityManager.createNativeQuery(nativeQuery);
             query.setParameter(1, slotId);
@@ -86,7 +86,7 @@ public class SlotCustomRepository {
 
             String nativeQuery = "SELECT id" +
                     " FROM sub_yards" +
-                    " WHERE id = (SELECT ref_yard FROM slots WHERE id = ?1)";
+                    " WHERE id = (SELECT ref_yard FROM slots WHERE id = ?)";
 
             query = entityManager.createNativeQuery(nativeQuery);
             query.setParameter(1, slotId);
@@ -102,7 +102,7 @@ public class SlotCustomRepository {
 
             String nativeQuery = "SELECT y.owner_id FROM yards y INNER JOIN sub_yards sub ON y.id = sub.parent_yard " +
                     "INNER JOIN slots ON slots.ref_yard = sub.id " +
-                    "WHERE slots.id = ?1";
+                    "WHERE slots.id = ?";
 
             query = entityManager.createNativeQuery(nativeQuery);
             query.setParameter(1, slotId);
