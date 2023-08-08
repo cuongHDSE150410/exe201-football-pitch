@@ -16,12 +16,12 @@ public class YardCustomRepository {
         Query query = null;
 
         if (districtId == null && provinceId == null) {
-            String nativeQuery = "SELECT * FROM yards WHERE is_active = true AND is_deleted = false";
+            String nativeQuery = "SELECT * FROM yards WHERE is_active = 'true' AND is_deleted = 'false'";
             query = entityManager.createNativeQuery(nativeQuery, YardEntity.class);
         }
 
         if (query == null && districtId != null) {
-            String nativeQuery = "SELECT * FROM yards WHERE is_deleted = false AND is_active = true AND district_id = ?";
+            String nativeQuery = "SELECT * FROM yards WHERE is_deleted = 'false' AND is_active = 'true' AND district_id = ?";
             query = entityManager.createNativeQuery(nativeQuery, YardEntity.class);
             query.setParameter(1, districtId);
         }
@@ -31,7 +31,7 @@ public class YardCustomRepository {
                     " INNER JOIN districts district ON district.id = yards.district_id" +
                     " WHERE yards.is_active = 'true'" +
                     " AND yards.is_deleted = 'false'" +
-                    " AND district.province_id = ?1";
+                    " AND district.province_id = ?";
             query = entityManager.createNativeQuery(nativeQuery, YardEntity.class);
             query.setParameter(1, provinceId);
         }
@@ -48,13 +48,13 @@ public class YardCustomRepository {
         Query query = null;
 
         if (districtId == null && provinceId == null) {
-            String nativeQuery = "SELECT COUNT(*) FROM yards WHERE is_active = true AND is_deleted = false";
+            String nativeQuery = "SELECT COUNT(*) FROM yards WHERE is_active = 'true' AND is_deleted = 'false'";
             query = entityManager.createNativeQuery(nativeQuery);
         }
 
         if (query == null && districtId != null) {
             String nativeQuery = "SELECT COUNT(*) FROM yards \n" +
-                    "WHERE is_deleted = false AND is_active = true AND district_id = ?1;";
+                    "WHERE is_deleted = 'false' AND is_active = 'true' AND district_id = ?;";
             query = entityManager.createNativeQuery(nativeQuery);
             query.setParameter(1, districtId);
         }
@@ -62,9 +62,9 @@ public class YardCustomRepository {
         if (query == null && provinceId != null) {
             String nativeQuery = "SELECT COUNT(yards.*) FROM yards" +
                     " INNER JOIN districts district ON district.id = yards.district_id" +
-                    " WHERE yards.is_active = true" +
-                    " AND yards.is_deleted = false" +
-                    " AND district.province_id = ?1";
+                    " WHERE yards.is_active = 'true'" +
+                    " AND yards.is_deleted = 'false'" +
+                    " AND district.province_id = ?";
             query = entityManager.createNativeQuery(nativeQuery);
             query.setParameter(1, provinceId);
         }
@@ -81,7 +81,7 @@ public class YardCustomRepository {
         Query query = null;
 
         try {
-            String nativeQuery = "UPDATE yards SET is_active = false WHERE owner_id = ?1";
+            String nativeQuery = "UPDATE yards SET is_active = 'false' WHERE owner_id = ?";
 
             query = entityManager.createNativeQuery(nativeQuery);
             query.setParameter(1, ownerId);
@@ -97,7 +97,7 @@ public class YardCustomRepository {
         Query query = null;
 
         try {
-            String nativeQuery = "UPDATE yards SET is_active = true WHERE owner_id = ?1";
+            String nativeQuery = "UPDATE yards SET is_active = 'true' WHERE owner_id = ?";
 
             query = entityManager.createNativeQuery(nativeQuery);
             query.setParameter(1, ownerId);
