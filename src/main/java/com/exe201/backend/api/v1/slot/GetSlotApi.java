@@ -54,7 +54,8 @@ public class GetSlotApi {
             return ResponseEntity.ok().body(gson.toJson(response));
         } catch (Exception exception) {
             exception.printStackTrace();
-            return ResponseEntity.internalServerError().build();
+            //return ResponseEntity.internalServerError().build();
+            return  ResponseEntity.badRequest().body(gson.toJson(exception.getMessage()));
         }
     }
 
