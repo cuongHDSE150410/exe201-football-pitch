@@ -26,10 +26,10 @@ public class SlotCustomRepository {
             LocalTime localTimeNow = LocalTime.now(ZoneId.of(DateHelper.VIETNAM_ZONE));
 
             String nativeQuery = "SELECT * FROM slots" +
-                    " WHERE (slots.id IN (SELECT slot_id FROM booking WHERE date BETWEEN ? AND ? AND status = ?))" +
-                    " AND ref_yard = ?" +
+                    " WHERE (slots.id IN (SELECT slot_id FROM booking WHERE date BETWEEN ?1 AND ?2 AND status = ?3))" +
+                    " AND ref_yard = ?4" +
                     " AND is_active = 'true'" +
-                    " AND start_time > ?";
+                    " AND start_time > ?5";
 
             query = entityManager.createNativeQuery(nativeQuery, SlotEntity.class);
             query.setParameter(1, startTime);
@@ -50,8 +50,8 @@ public class SlotCustomRepository {
             Timestamp startTime = Timestamp.valueOf(queryDate.toString() + " 00:00:00");
             Timestamp endTime = Timestamp.valueOf(queryDate.toString() + " 23:59:59");
             String nativeQuery = "SELECT * FROM slots" +
-                    " WHERE (slots.id IN (SELECT slot_id FROM booking WHERE date BETWEEN ? AND ? AND status = ?))" +
-                    " AND ref_yard = ?" +
+                    " WHERE (slots.id IN (SELECT slot_id FROM booking WHERE date BETWEEN ?1 AND ?2 AND status = ?3))" +
+                    " AND ref_yard = ?4" +
                     " AND is_active = 'true'";
             query = entityManager.createNativeQuery(nativeQuery, SlotEntity.class);
             query.setParameter(1, startTime);
