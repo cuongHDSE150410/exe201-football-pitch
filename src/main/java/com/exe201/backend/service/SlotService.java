@@ -33,9 +33,9 @@ public class SlotService {
     private SubYardRepository subYardRepository;
     private TypeYardRepository typeYardRepository;
 
-    public List<Slot> getAllSlotInSubYardByDate(String subYardId, String date) {
+    public List<Slot> getAllSlotInSubYardByDate(String subYardId, String date) throws Exception {
         try {
-            LocalDate queryDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("d/M/yyyy"));
+            LocalDate queryDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             LocalDate now = LocalDate.now(ZoneId.of(DateHelper.VIETNAM_ZONE));
             if (queryDate.compareTo(now) < 0) {
                 return new ArrayList<>();
@@ -49,8 +49,7 @@ public class SlotService {
 
             return allSlots;
         } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+            throw new Exception(e.getMessage());
         }
     }
 

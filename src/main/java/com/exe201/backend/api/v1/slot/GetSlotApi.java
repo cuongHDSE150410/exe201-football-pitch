@@ -49,13 +49,13 @@ public class GetSlotApi {
             }
 
             //Successful query
-            List<Slot> slots = slotService.getAllSlotInSubYardByDate(subYardId, getSlotRequest.getDate());
+            List<Slot> slots = slotService.getAllSlotInSubYardByDate(subYardId, getSlotRequest.getDate().toString());
             response = new SlotResponse("Get slots successful", slots);
             return ResponseEntity.ok().body(gson.toJson(response));
         } catch (Exception exception) {
             //exception.printStackTrace();
             //return ResponseEntity.internalServerError().build();
-            return  ResponseEntity.ok().body(gson.toJson(exception.getMessage()));
+            return ResponseEntity.badRequest().body(gson.toJson(exception.getMessage()));
         }
     }
 
@@ -90,7 +90,7 @@ public class GetSlotApi {
             }
 
             //Successful query
-            List<Slot> slots = slotService.getAllSlotInSubYardByDateFromOwner(subYardId, getSlotRequest.getDate());
+            List<Slot> slots = slotService.getAllSlotInSubYardByDateFromOwner(subYardId, getSlotRequest.getDate().toString());
             response = new SlotResponse("Get slots successful", slots);
             return ResponseEntity.ok().body(gson.toJson(response));
         } catch (Exception exception) {
@@ -130,7 +130,7 @@ public class GetSlotApi {
             }
 
             //Successful query
-            BookedSlotModel bookedSlotModel = slotService.getBookedSlotModel(slotId, getSlotRequest.getDate());
+            BookedSlotModel bookedSlotModel = slotService.getBookedSlotModel(slotId, getSlotRequest.getDate().toString());
             if (bookedSlotModel == null) {
                 response = new BookedSlotDetailResponse("There is no booking in this slot on " + getSlotRequest.getDate(), null);
                 return ResponseEntity.ok().body(gson.toJson(response));
