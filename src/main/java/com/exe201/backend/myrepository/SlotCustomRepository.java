@@ -31,6 +31,13 @@ public class SlotCustomRepository {
                     " AND is_active = 'true'" +
                     " AND start_time > ?5";
 
+//            String nativeQuery1 = "SELECT * FROM slots" +
+//                    " WHERE (slots.id IN (SELECT slot_id FROM booking WHERE date BETWEEN startTiem AND endTime AND status = ?3))" +
+//                    " AND ref_yard = ?4" +
+//                    " AND is_active = 'true'" +
+//                    " AND start_time > ?5";
+
+
             query = entityManager.createNativeQuery(nativeQuery, SlotEntity.class);
             query.setParameter(1, startTime);
             query.setParameter(2, endTime);
@@ -70,7 +77,7 @@ public class SlotCustomRepository {
 
             String nativeQuery = "SELECT parent_yard" +
                     " FROM sub_yards" +
-                    " WHERE id = (SELECT ref_yard FROM slots WHERE id = ?)";
+                    " WHERE id = (SELECT ref_yard FROM slots WHERE id = '?')";
 
             query = entityManager.createNativeQuery(nativeQuery);
             query.setParameter(1, slotId);
