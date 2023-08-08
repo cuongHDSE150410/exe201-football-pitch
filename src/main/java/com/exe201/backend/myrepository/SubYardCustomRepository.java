@@ -66,7 +66,7 @@ public class SubYardCustomRepository {
 
             String nativeQuery = "SELECT s.parent_yard" +
                     " FROM sub_yards s" +
-                    " WHERE s.Id = '?'";
+                    " WHERE s.Id = '?1'";
 
             query = entityManager.createNativeQuery(nativeQuery);
             query.setParameter(1, subYardId);
