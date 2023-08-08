@@ -16,7 +16,7 @@ public class SubYardCustomRepository {
     public List<SubYardEntity> getAllActiveSubYardByBigYard(String bigYardId) {
         String nativeQuery = "SELECT s.*" +
                 " FROM sub_yards s INNER JOIN yards y ON s.parent_yard = y.id" +
-                " WHERE s.parent_yard = ?" +
+                " WHERE s.parent_yard = ?1" +
                 " AND s.is_active = 'true'" +
                 " AND s.is_deleted = 'false'" +
                 " AND y.is_active = 'true'" +
