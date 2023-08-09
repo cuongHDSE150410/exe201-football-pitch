@@ -16,7 +16,7 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 public class GetSlotRequest {
     @NotNull
-    private DateTime date;
+    private String date;
 
 
 }

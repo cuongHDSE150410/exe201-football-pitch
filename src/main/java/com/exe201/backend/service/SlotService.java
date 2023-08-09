@@ -35,17 +35,21 @@ public class SlotService {
 
     public List<Slot> getAllSlotInSubYardByDate(String subYardId, String date) throws Exception {
         try {
-            LocalDate queryDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-            LocalDate now = LocalDate.now(ZoneId.of(DateHelper.VIETNAM_ZONE));
-            if (queryDate.compareTo(now) < 0) {
-                return new ArrayList<>();
+            List<Slot> allSlots = new ArrayList<>();
+
+            if (!date.equals("string")) {
+                LocalDate queryDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                LocalDate now = LocalDate.now(ZoneId.of(DateHelper.VIETNAM_ZONE));
+                if (queryDate.compareTo(now) < 0) {
+                    return new ArrayList<>();
+                }
+
+                allSlots = getAllSlotsInSubYardByDate(subYardId, queryDate);
+                List<Slot> bookedSlots = getBookedSlotsInSubYardByDate(subYardId, queryDate);
+
+                allSlots = updateBookedStateOfAllSlots(allSlots, bookedSlots);
+                Collections.sort(allSlots);
             }
-
-            List<Slot> allSlots = getAllSlotsInSubYardByDate(subYardId, queryDate);
-            List<Slot> bookedSlots = getBookedSlotsInSubYardByDate(subYardId, queryDate);
-
-            allSlots = updateBookedStateOfAllSlots(allSlots, bookedSlots);
-            Collections.sort(allSlots);
 
             return allSlots;
         } catch (Exception e) {
